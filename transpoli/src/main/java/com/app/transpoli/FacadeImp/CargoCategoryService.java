@@ -2,18 +2,22 @@ package com.app.transpoli.FacadeImp;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.transpoli.Facade.ICargoCategory;
 import com.app.transpoli.Models.CargoCategory;
+import com.app.transpoli.Repository.CargoCategoryRepository;
 
 @Service
 public class CargoCategoryService implements ICargoCategory{
 
+	@Autowired
+	CargoCategoryRepository repository;
+	
 	@Override
 	public List<CargoCategory> cargoCategoriesList() {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findAll();
 	}
 
 	@Override
