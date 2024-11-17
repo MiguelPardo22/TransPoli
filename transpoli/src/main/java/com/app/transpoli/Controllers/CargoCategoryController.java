@@ -25,7 +25,7 @@ public class CargoCategoryController {
      */
     @GetMapping("/cargo-categories")
     public String CargoCategoriesView(Model model) {
-        return "CargoCategoryView";
+        return "Views/CargoCategoryView";
     }
     
     /**
