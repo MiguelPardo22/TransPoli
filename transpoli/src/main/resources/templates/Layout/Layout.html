@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:replace="${pageTitle} :: title">Aplicación</title>
+    
+    <!-- Librerías -->
+    <link rel="stylesheet" th:href="@{/static/bookstores/bootstrap 5.0.2/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../../static/bookstores/datatables/datatables.min.css">
+    <link rel="stylesheet" href="../../static/bookstores/fontawesome-free-6.6.0-web/css/all.min.css">
+    <link rel="stylesheet" href="../../static/bookstores/SweetAlert/css/sweetalert2.min.css">
+</head>
+<body>
+
+    <!-- Encabezado común -->
+    <header>
+        <h1>Mi Aplicación</h1>
+        <button class="btn btn-success">Sorra</button>
+    </header>
+
+    <!-- Contenido dinámico -->
+    <div th:fragment="~{::Layout}"></div>
+
+    <!-- Pie de página común -->
+    <footer>
+        <p>&copy; 2024 Mi Aplicación</p>
+    </footer>
+    
+    <script src="../../static/bookstores/JQuery/jquery-3.7.1.min.js"></script>
+    <script src="../../static/bookstores/datatables/datatables.min.js"></script>
+    <script src="../../static/bookstores/fontawesome-free-6.6.0-web/js/all.min.js"></script>
+    <script src="../../static/bookstores/bootstrap 5.0.2/js/bootstrap.min.js"></script>
+    <script src="../../static/bookstores/SweetAlert/js/sweetalert2.all.min.js"></script>
+</body>
+</html>
