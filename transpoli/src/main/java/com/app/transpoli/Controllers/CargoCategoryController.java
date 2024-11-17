@@ -25,6 +25,9 @@ public class CargoCategoryController {
      */
     @GetMapping("/cargo-categories")
     public String CargoCategoriesView(Model model) {
+    	
+    	model.addAttribute("CargoCategories", "brayan es una puta");
+    	
         return "Views/CargoCategoryView";
     }
     
