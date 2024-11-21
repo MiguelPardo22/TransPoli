@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{/Layout/Resources::Links}">
+<meta charset="UTF-8">
+<title>Bienvenido</title>
+</head>
+<body>
+	Hola:
+	<span sec:authentication="principal.username"></span>
+	<br>
+	<div sec:authorize="isAuthenticated()">
+		<a th:href="@{/logout}" style="text-decoration: none;"><button
+				class="btn btn-danger">Cerrar Sesion</button></a>
+	</div>
+
+	<div th:replace="~{/Layout/Resources::Scripts}"></div>
+</body>
+</html>
