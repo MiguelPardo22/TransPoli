@@ -39,10 +39,13 @@ public class SecurityConfiguration {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(authorize -> authorize
-				.requestMatchers("/register**", "/bookstores/**").permitAll().anyRequest().authenticated())
+				.requestMatchers("/register**", "/bookstores/**").permitAll()
+				.anyRequest().authenticated())
 				.formLogin(form -> form.loginPage("/login").permitAll())
-				.logout(logout -> logout.invalidateHttpSession(true).clearAuthentication(true)
-						.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout")
+				.logout(logout -> logout.invalidateHttpSession(true)
+						.clearAuthentication(true)
+						.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+						.logoutSuccessUrl("/login?logout")
 						.permitAll());
 
 		return http.build();

@@ -1,14 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 
-<head th:replace="~{/Layout/Resources::Links}">
+<head>
+	<div th:insert="~{/Layout/Resources::Links}"></div>
 	<title>Categorías de Carga</title>
 </head>
 
 <body>
-	<h2>Categorías de la Carga</h2>
-	<button class="btn btn-info">aaaaaaaaaaa</button>
-	<p>El valor de CargoCategories es: <span th:text="${CargoCategories}"></span></p>
+	<div th:replace="~{/Layout/Sidebar::SideBar}">
+	
+		<div th:fragment="contentSideBar">
+            <h2>Lista de Categorías de Carga</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Carga A</td>
+                        <td>Descripción de la carga A</td>
+                        <td><button>Ver</button></td>
+                    </tr>
+                    <tr>
+                        <td>Otra Carga</td>
+                        <td>Descripción de la otra carga</td>
+                        <td><button>Ver</button></td>
+                    </tr>
+                    <!-- Más filas aquí -->
+                </tbody>
+            </table>
+        </div>
+	
+	</div>
 	<div th:replace="~{/Layout/Resources::Scripts}"></div>
 </body>
 
