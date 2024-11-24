@@ -2,18 +2,22 @@ package com.app.transpoli.FacadeImp;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.transpoli.Facade.IVehicule;
 import com.app.transpoli.Models.Vehicle;
+import com.app.transpoli.Repository.VehiculeRepository;
 
 @Service
 public class VehicleService implements IVehicule{
 
+	@Autowired
+	VehiculeRepository repository;
+	
     @Override
     public List<Vehicle> vehicleList() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'vehicleList'");
+        return repository.findAll();
     }
 
     @Override

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head th:insert="~{/Layout/Resources::Links}">
+
+</head>
+
+<body>
+	<div th:replace="~{/Layout/Sidebar::SideBar}">
+
+		<div th:fragment="contentSideBar">
+			<div class="container">
+
+				<div class="text-center">
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+						<i class="fa-solid fa-circle-plus"></i>
+					</button>
+				</div>
+
+				<br />
+				<div class="table-responsive">
+					<table class="table align-middle table-bordered caption-top text-center table-striped table-hover"
+						id="vehiculeTable">
+						<caption>Lista de Vehiculos</caption>
+						<thead class="table-dark">
+							<tr>
+
+								<th>#</th>
+								<th>Placa</th>
+								<th>Kilometraje</th>
+								<th>Modelo</th>
+								<th>Tipo Vehiculo</th>
+								<th>Capacidad Carga</th>
+								<th>Conductor</th>
+								<th>Estado</th>
+								<th>Editar</th>
+								<th>Inactivar</th>
+								<th>Eliminar</th>
+
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+
+			<div th:replace="~{/Layout/Modal::Modal}">
+
+				<div th:fragment="ModalTitle">
+					Agregar Vehiculo
+				</div>
+
+				<div th:fragment="ModalBody">
+
+					<h1>Holaaaaaaaaaaa</h1>
+
+				</div>
+
+			</div>
+
+
+		</div>
+	</div>
+	<div th:replace="~{/Layout/Resources::Scripts}"></div>
+	<script th:src="@{/Scripts/Vehicule.js}"></script>
+</body>
+
+</html>
