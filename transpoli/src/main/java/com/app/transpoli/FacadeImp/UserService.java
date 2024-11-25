@@ -22,32 +22,40 @@ import com.app.transpoli.Repository.UserRepository;
 public class UserService implements IUser {
 
 	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;	
-	
+	private BCryptPasswordEncoder passwordEncoder;
+
 	@Autowired
 	private UserRepository userRepository;
 
 	@Override
 	public User save(RegisterUserDTO registerDTO) {
+		// Create a Role object with the role specified in registerDTO
+		Role role = new Role(registerDTO.getRole());
+
+		// Use Arrays.asList(role) to create a Collection<Role> with the specified role
 		User user = new User(registerDTO.getName(), registerDTO.getLastname(), registerDTO.getEmail(),
-				passwordEncoder.encode(registerDTO.getPassword()), Arrays.asList(new Role("ADMIN")));
+				passwordEncoder.encode(registerDTO.getPassword()), Arrays.asList(role));
 
 		return userRepository.save(user);
 	}
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = userRepository.findByEmail(username);
-		if (user == null) {
-			throw new UsernameNotFoundException("Usuario no Valido");
-		}
-		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
-				choiseRoleAuthorities(user.getRoles()));
-	}
- 
-	private Collection<? extends GrantedAuthority> choiseRoleAuthorities(Collection<Role> roles) {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("Usuario no válido");
+        }
+        return new org.springframework.security.core.userdetails.User(
+                user.getEmail(),
+                user.getPassword(),
+                choiseRoleAuthorities(user.getRoles())
+        );
+    }
 
-		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
-	}
+	private Collection<? extends GrantedAuthority> choiseRoleAuthorities(Collection<Role> roles) {
+        return roles.stream()
+                .map(role -> new SimpleGrantedAuthority(role.getName()))
+                .collect(Collectors.toList());
+    }
 
 }

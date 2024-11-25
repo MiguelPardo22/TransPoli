@@ -1,46 +1,45 @@
 package com.app.transpoli.FacadeImp;
 
-import java.util.List;
-
-import com.app.transpoli.Facade.IAssignments;
 import com.app.transpoli.Models.Assignment;
+import com.app.transpoli.Repository.AssignmentRepository;
+import com.app.transpoli.Facade.IAssignments;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
 
-public class AssignmentService implements IAssignments{
+@Service
+public class AssignmentService implements IAssignments {
 
-    @Override
-    public List<Assignment> assignmentList() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'assignmentList'");
-    }
+	@Autowired
+	private AssignmentRepository assignmentRepository;
 
-    @Override
-    public Assignment findByAssignment(long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findByAssignment'");
-    }
+	@Override
+	public Assignment saveAssignment(Assignment assignment) {
+		return assignmentRepository.save(assignment);
+	}
 
-    @Override
-    public void saveAssignment(Assignment assignment) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'saveAssignment'");
-    }
+	@Override
+	public Assignment getAssignmentById(Long id) {
+		Optional<Assignment> optionalAssignment = assignmentRepository.findById(id);
+		return optionalAssignment.orElse(null);
+	}
 
-    @Override
-    public void deleteAssignment(Assignment assignment) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteAssignment'");
-    }
+	@Override
+	public List<Assignment> getAllAssignments() {
+		return assignmentRepository.findAll();
+	}
 
-    @Override
-    public boolean finishAssignment(long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'finishAssignment'");
-    }
+	@Override
+	public Assignment updateAssignment(Assignment assignment) {
+		if (assignmentRepository.existsById(assignment.getId())) {
+			return assignmentRepository.save(assignment);
+		}
+		return null;
+	}
 
-    @Override
-    public boolean assignmentDriver(long idDriver, long idAssignment) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'assignmentDriver'");
-    }
-    
+	@Override
+	public void deleteAssignment(Long id) {
+		assignmentRepository.deleteById(id);
+	}
 }

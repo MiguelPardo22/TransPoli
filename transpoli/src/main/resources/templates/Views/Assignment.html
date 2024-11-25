@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="~{/Layout/Resources::Links}">
+<title>Gestión de Assignments</title>
+</head>
+<body>
+	<div th:replace="~{/Layout/Sidebar::SideBar}">
+		<div th:fragment="contentSideBar">
+			<div class="container">
+				<div class="card">
+					<div class="card-header">Crear / Editar Asignacion</div>
+					<div class="card-body">
+
+						<form th:action="@{/assignments/save}" th:object="${assignment}"
+							method="post">
+							<div class=row>
+								<input type="hidden" th:field="*{id}" />
+								<div class="col">
+									<label for="state">Estado:</label> <select id="state"
+										name="state" th:field="*{state}" class="form-select">
+										<option th:value="ENTREGADO" th:text="'ENTREGADO'"></option>
+										<option th:value="EN_TRANSITO" th:text="'EN TRANSITO'"></option>
+										<option th:value="POR_RECOGER" th:text="'POR RECOGER'"></option>
+									</select>
+								</div>
+								<div class="col">
+									<div class="mb-3">
+										<label for="conductor" class="form-label">Conductor:</label> <select
+											class="form-select" id="conductor" name="idDriver">
+											<option value="">Seleccione un conductor</option>
+											<th:block th:each="person : ${listPeople}">
+												<option th:value="${person.id}"
+													th:text="${person.names} + ' ' + ${person.last_names}"></option>
+											</th:block>
+										</select>
+									</div>
+								</div>
+							</div>
+							<br>
+							<div class=row>
+								<div class="col">
+									<label for="idInventory">ID del Inventario:</label> <input
+										type="number" id="idInventory" name="idInventory"
+										class="form-control" th:field="*{idInventory}" required />
+								</div>
+								<div class="col">
+									<label for="vehicle">Vehículo:</label> <select id="vehicle"
+										class="form-select" name="vehicle.id">
+										<option value="">Seleccione un vehiculo</option>
+										<option th:each="vehicle : ${vehicles}"
+											th:value="${vehicle.id}" th:text="${vehicle.placa}">Opción
+											por defecto</option>
+									</select>
+								</div>
+
+							</div>
+							<br>
+							<div class="card-footer d-flex justify-content-center">
+								<button type="submit" class="btn btn-success"
+									th:text="${assignment.id != null ? 'Actualizar' : 'Guardar'}"></button>
+							</div>
+
+						</form>
+
+					</div>
+
+				</div>
+			</div>
+
+			<div class="container">
+				<table
+					class="table align-middle table-bordered caption-top text-center table-striped table-hover">
+					<caption>Lista de Asignaciones</caption>
+					<thead class="table-dark">
+						<tr>
+							<th>ID</th>
+							<th>Estado</th>
+							<th>ID Conductor</th>
+							<th>ID Inventario</th>
+							<th>Placa Vehiculo</th>
+							<th>Tipo Vehiculo</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="assignment : ${assignments}">
+							<td th:text="${assignment.id}"></td>
+							<td th:text="${assignment.state}"></td>
+							<td th:text="${assignment.idDriver.names}"></td>
+							<td th:text="${assignment.idInventory}"></td>
+							<td th:text="${assignment.vehicle.placa}"></td>
+							<td th:text="${assignment.vehicle.type}"></td>
+							<td><a
+								th:href="@{/assignments/edit/{id}(id=${assignment.id})}">Editar</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+	<div th:replace="~{/Layout/Resources::Scripts}"></div>
+</body>
+</html>

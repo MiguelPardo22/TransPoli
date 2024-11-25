@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestión de Vehículos</title>
+</head>
+<body>
+    <h2>Formulario de Vehículo</h2>
+    <form th:action="@{/vehicle/save}" th:object="${vehicle}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        
+        <label for="placa">Placa:</label>
+        <input type="text" id="placa" name="placa" th:field="*{placa}" required />
+
+        <label for="type">Tipo de Vehículo:</label>
+        <input type="text" id="type" name="type" th:field="*{type}" required />
+
+        <button type="submit" th:text="${vehicle.id != null ? 'Actualizar' : 'Guardar'}"></button>
+    </form>
+
+    <h2>Lista de Vehículos</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Placa</th>
+                <th>Tipo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="vehicle : ${vehicles}">
+                <td th:text="${vehicle.id}"></td>
+                <td th:text="${vehicle.placa}"></td>
+                <td th:text="${vehicle.type}"></td>
+                <td>
+                    <a th:href="@{/vehicle/edit/{id}(id=${vehicle.id})}">Editar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,50 +1,48 @@
 package com.app.transpoli.FacadeImp;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.transpoli.Facade.IVehicule;
 import com.app.transpoli.Models.Vehicle;
+import com.app.transpoli.Repository.VehiculeRepository;
 
 @Service
-public class VehicleService implements IVehicule{
+public class VehicleService implements IVehicule {
 
-    @Override
-    public List<Vehicle> vehicleList() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'vehicleList'");
-    }
+	@Autowired
+	private VehiculeRepository vehiculeRepository;
 
-    @Override
-    public Vehicle findByIdVehicle(long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findByIdVehicle'");
-    }
+	@Override
+	public Vehicle saveVehicle(Vehicle Vehicle) {
+		return vehiculeRepository.save(Vehicle);
+	}
 
-    @Override
-    public void save(Vehicle vehicle) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
-    }
+	@Override
+	public Vehicle getVehicleById(Long id) {
+		Optional<Vehicle> optionalVehicle = vehiculeRepository.findById(id);
+		return optionalVehicle.orElse(null);
+	}
 
-    @Override
-    public void Inactivate(long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'Inactivate'");
-    }
+	@Override
+	public List<Vehicle> getAllVehicles() {
+		return vehiculeRepository.findAll();
+	}
 
-    @Override
-    public Vehicle getPositionVehicle(long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPositionVehicle'");
-    }
+	@Override
+	public Vehicle updateVehicle(Vehicle Vehicle) {
+		if (vehiculeRepository.existsById(Vehicle.getId())) {
+			return vehiculeRepository.save(Vehicle);
+		}
+		return null;
+	}
 
-    @Override
-    public boolean alertReport() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'alertReport'");
-    }
+	@Override
+	public void deleteVehicle(Long id) {
+		vehiculeRepository.deleteById(id);
+	}
 
-    
 }
