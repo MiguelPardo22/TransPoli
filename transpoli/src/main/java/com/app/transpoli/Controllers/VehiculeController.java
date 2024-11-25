@@ -93,16 +93,18 @@ public class VehiculeController {
 	}
 
 	/**
-	 * Método para inactivar un vehículo existente.
-	 *
-	 * @param id El identificador único del vehículo que se desea inactivar.
-	 * @return Redirecciona a la vista de la lista de vehículos después de
-	 *         inactivar.
-	 */
-	@GetMapping("/vehicle/inactivate/{id}")
-	public String inactivateVehicle(@PathVariable long id) {
-		return "redirect:/vehicles";
-	}
+     * Método para inactivar un vehículo existente.
+     *
+     * @param id El identificador único del vehículo que se desea inactivar.
+     * @return Redirecciona a la vista de la lista de vehículos después de inactivar.
+     */
+    @GetMapping("/vehicle/inactivate/{id}")
+    public String inactivateVehicle(@PathVariable long id) {
+        
+    	iVehicule.Inactivate(id);
+
+        return "redirect:/admin/vehicles";
+    }
 
 	/**
 	 * Método para obtener la posición actual de un vehículo.

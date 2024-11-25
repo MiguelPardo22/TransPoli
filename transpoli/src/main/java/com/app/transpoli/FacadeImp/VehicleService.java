@@ -38,8 +38,16 @@ public class VehicleService implements IVehicule{
 
     @Override
     public void Inactivate(long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'Inactivate'");
+        
+        Vehicle vehicle = repository.findById(id).orElse(null);
+        
+        if (vehicle != null) {
+            
+            vehicle.setState("Inactivo");
+            repository.save(vehicle);
+        } else {
+            throw new IllegalArgumentException("Vehículo no encontrado con el ID: " + id);
+        }
     }
 
     @Override
