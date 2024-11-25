@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	$('#vehiculeTable').DataTable({
 		ajax: {
-			url: 'http://localhost:8080/vehiclesList',
+			url: 'http://localhost:8080/admin/vehiclesList',
 			type: "GET",
 		},
 		columns: [
@@ -32,4 +32,24 @@ $(document).ready(function() {
 		},
 		responsive: true
 	});
+	
+	$('#vehicleForm').submit(function(event) {
+        event.preventDefault();
+       
+        var formData = $(this).serialize();
+
+        $.ajax({
+            url: 'http://localhost:8080/admin/vehicle/save', 
+            type: 'POST',
+            data: formData, 
+            success: function(response) {
+                alert('Vehículo registrado exitosamente!');
+                window.location.href = '/admin/vehicles'; 
+            },
+            error: function(xhr, status, error) {
+                alert('¡Algo salió mal! Intenta de nuevo. ' + error);
+            }
+        });
+    });
+	
 });

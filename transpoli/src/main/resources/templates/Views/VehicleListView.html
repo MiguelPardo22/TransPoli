@@ -52,7 +52,74 @@
 
 				<div th:fragment="ModalBody">
 
-					<h1>Holaaaaaaaaaaa</h1>
+					<form id="vehicleForm">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="mb-3">
+									<label for="placa" class="form-label">Placa</label>
+									<input type="text" class="form-control" id="placa" name="plate"
+										placeholder="Ingrese la placa">
+								</div>
+								<div class="mb-3">
+									<label for="kilometraje" class="form-label">Kilometraje</label>
+									<input type="number" class="form-control" id="kilometraje" name="mileage"
+										placeholder="Ingrese el kilometraje">
+								</div>
+								<div class="mb-3">
+									<label for="modelo" class="form-label">Modelo</label>
+									<input type="text" class="form-control" id="modelo" name="model"
+										placeholder="Ingrese el modelo">
+								</div>
+								<div class="mb-3">
+									<label for="tipoVehiculo" class="form-label">Tipo Vehículo</label>
+									<input type="text" class="form-control" id="tipoVehiculo" name="type_vehicule"
+										placeholder="Ingrese el tipo de vehículo">
+								</div>
+							</div>
+
+							<div class="col-md-6">
+								<div class="mb-3">
+									<label for="capacidadCarga" class="form-label">Capacidad Carga</label>
+									<input type="number" class="form-control" id="capacidadCarga" name="load_capacity"
+										placeholder="Ingrese la capacidad de carga">
+								</div>
+								<div class="mb-3">
+									<label for="conductor" class="form-label">Conductor</label>
+									<select class="form-control" id="conductor" name="person_id">
+										<option value="">Seleccione un conductor</option>
+										<th:block th:each="person : ${listPeople}">
+											<option th:value="${person.id}"
+												th:text="${person.names} + ' ' + ${person.last_names}"></option>
+										</th:block>
+									</select>
+								</div>
+
+								<div class="mb-3">
+									<label for="sensor" class="form-label">Sensor</label>
+									<select class="form-control" id="sensor" name="sensor_id">
+										<option value="">Seleccione un Sensor</option>
+										<th:block th:each="sensor : ${listSensors}">
+											<option th:value="${sensor.id}" th:text="${sensor.name}"></option>
+										</th:block>
+									</select>
+								</div>
+
+								<div class="mb-3">
+									<label for="estado" class="form-label">Estado</label>
+									<select class="form-select" id="estado" name="state">
+										<option value="Activo">Activo</option>
+										<option value="Inactivo">Inactivo</option>
+									</select>
+								</div>
+							</div>
+						</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+							<button type="submit" class="btn btn-primary">Guardar</button>
+						</div>
+					</form>
+
 
 				</div>
 

@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.transpoli.Facade.IVehicule;
+import com.app.transpoli.Models.Sensor;
 import com.app.transpoli.Models.Vehicle;
+import com.app.transpoli.Repository.SensorRepository;
 import com.app.transpoli.Repository.VehiculeRepository;
 
 @Service
@@ -14,6 +16,9 @@ public class VehicleService implements IVehicule{
 
 	@Autowired
 	VehiculeRepository repository;
+	
+	@Autowired
+	SensorRepository sensorRepository;
 	
     @Override
     public List<Vehicle> vehicleList() {
@@ -28,8 +33,7 @@ public class VehicleService implements IVehicule{
 
     @Override
     public void save(Vehicle vehicle) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
+        repository.save(vehicle);
     }
 
     @Override
@@ -49,6 +53,11 @@ public class VehicleService implements IVehicule{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'alertReport'");
     }
+
+	@Override
+	public List<Sensor> listSensors() {
+		return sensorRepository.findAll();
+	}
 
     
 }

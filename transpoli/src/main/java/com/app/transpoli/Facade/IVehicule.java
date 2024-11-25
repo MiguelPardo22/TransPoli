@@ -1,6 +1,8 @@
 package com.app.transpoli.Facade;
 
 import java.util.List;
+
+import com.app.transpoli.Models.Sensor;
 import com.app.transpoli.Models.Vehicle;
 
 public interface IVehicule {
@@ -48,4 +50,13 @@ public interface IVehicule {
      * @return true si se ha generado una alerta, false en caso contrario.
      */
     public boolean alertReport();
+    
+    /**
+     * Genera una lista de los sensores registrados
+     *
+     * @return Retorna una lista de los sensores registrados
+     * 
+     */
+    public List<Sensor> listSensors();
+    
 }

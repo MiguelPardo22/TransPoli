@@ -15,6 +15,9 @@ public class Sensor {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	@Column(name = "name")
+	private String name;
+	
 	@Column(name = "latitude")
 	private Double latitude;
 	
@@ -30,6 +33,14 @@ public class Sensor {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Double getLatitude() {
@@ -59,8 +70,10 @@ public class Sensor {
 	public Sensor() {
 	}
 
-	public Sensor(long id, Double latitude, Double length, Double velocity) {
+	public Sensor(long id, String name, Double latitude, Double length, Double velocity) {
+		super();
 		this.id = id;
+		this.name = name;
 		this.latitude = latitude;
 		this.length = length;
 		this.velocity = velocity;
